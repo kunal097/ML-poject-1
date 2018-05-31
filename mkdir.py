@@ -63,6 +63,26 @@ if 'directory'in usr_input or 'folder' in usr_input :
         for i in exact_path:
             if i.lower() == path:
                 path=i
+                # print('********* {}'.format(i))
+        lst_dir =[]
+
+        for dpath , dname , fname in os.walk('/home/pybot/'):
+            for directory in dname:
+                dp = os.path.join(dpath, directory)
+                if path in dp:
+                    indx = dp.index(path)+7
+                    # print(type(lst_dir))
+                    lst_dir.append(dp[:indx])
+
+
+
+
+        lst_dir = set(lst_dir)
+        # print("&&&&&&&&&&&&&&&&&&& {}".format(lst_dir))
+
+        if len(lst_dir) >1:
+            text_to_speech('There exist more than one path')
+
 
         text_to_speech('If I am correct then you want create {} under {}'.format(dir_name , path))
         reply = recognize_speech()
